@@ -26,3 +26,46 @@ This is a serverless AWS-based reminder service that allows users to set and rec
   - When TTL expires, send-reminder-lambda triggers a notification via SES (email) and SNS (mobile SMS).
 - Infrastructure as Code
   - Terraform provisions all AWS resources.
+---
+## Postman
+I have used Postman to test this solution, Below  Postman API request bodies are mentioned to set and retrieve stored reminders
+### Setting a Reminder
+-  The API end point is going to be like this 
+``` bash
+https://{YOUR AWS API GATEWAY ENDPOINT}/setreminder
+```
+- Example Request Body for Setting an Email Reminder 
+``` bash
+{
+  "name": "Wajeehabatool",
+  "contactInfo": "wajeehabatool2021@gmail.com",
+  "reminderText": "Doctor appointment in 15 minutes",
+  "reminderTime": "2025-03-10 14:15:00",  
+  "timeZone": "Asia/Karachi"
+}
+
+```
+- Here's the recieved email reminder snapshot
+  
+  ![image](https://github.com/user-attachments/assets/090dafa9-2e12-4079-a7ea-2624b04846be)
+
+- Example Request Body for Setting a Phone Reminder
+  ``` bash
+  {
+  "name": "wajeehabatool",
+  "contactInfo": "+923049902383",
+  "reminderText": "Your appointment is tomorrow at 10 AM!",
+  "reminderTime": "2025-02-03 00:45:00",  
+  "timeZone": "Asia/Karachi"
+  }
+
+  ```
+- Here's the received phone reminder snapshot
+  
+  ![image](https://github.com/user-attachments/assets/1bb91b1d-6759-4831-a900-2ebb9156023a)
+
+### Getting stored reminder
+- Use the below endpoint to retrieve stored reminders
+  ``` bash
+  https://{your AWS API GATEWAY ENDPOINT}/getreminders?name=wajeehabatool
+  ``` 
